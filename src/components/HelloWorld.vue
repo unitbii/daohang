@@ -31,7 +31,7 @@
 </style>
 <template>
   <div class="layout">
-    <Layout :style="{minHeight: '100vh'}">
+    <i-layout :style="{minHeight: '100vh'}">
       <Sider collapsible :collapsed-width="78" v-model="isCollapsed">
         <Menu active-name="1-2" theme="dark" width="auto" :class="menuitemClasses">
           <menu-item name="1-1">
@@ -61,7 +61,7 @@
           </Card>
         </Content>
       </Layout>
-    </Layout>
+    </i-layout>
   </div>
 </template>
 <script>
