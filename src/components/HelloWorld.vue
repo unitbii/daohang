@@ -32,7 +32,7 @@
 <template>
   <div class="layout">
     <i-layout :style="{minHeight: '100vh'}">
-      <Sider collapsible :collapsed-width="78" v-model="isCollapsed">
+      <i-sider collapsible :collapsed-width="78" v-model="isCollapsed">
         <Menu active-name="1-2" theme="dark" width="auto" :class="menuitemClasses">
           <menu-item name="1-1">
             <Icon type="ios-navigate"></Icon>
@@ -47,8 +47,8 @@
             <span>Option 3</span>
           </menu-item>
         </Menu>
-      </Sider>
-      <Layout>
+      </i-sider>
+      <i-layout>
         <Header :style="{background: '#fff', boxShadow: '0 2px 3px 2px rgba(0,0,0,.1)'}"></Header>
         <Content :style="{padding: '0 16px 16px'}">
           <Breadcrumb :style="{margin: '16px 0'}">
@@ -60,7 +60,7 @@
             <div style="height: 600px">Content</div>
           </Card>
         </Content>
-      </Layout>
+      </i-layout>
     </i-layout>
   </div>
 </template>
