@@ -1,4 +1,4 @@
-<style scoped>
+<style lang="less">
   .layout-con {
     height: 100%;
     width: 100%;
@@ -29,24 +29,12 @@
     font-size: 22px;
   }
 </style>
+
 <template>
   <div class="layout">
     <i-layout :style="{minHeight: '100vh'}">
       <i-sider collapsible :collapsed-width="78" v-model="isCollapsed">
-        <Menu active-name="1-2" theme="dark" width="auto" :class="menuitemClasses">
-          <menu-item name="1-1">
-            <Icon type="ios-navigate"></Icon>
-            <span>Option 1</span>
-          </menu-item>
-          <menu-item name="1-2">
-            <Icon type="search"></Icon>
-            <span>Option 2</span>
-          </menu-item>
-          <menu-item name="1-3">
-            <Icon type="settings"></Icon>
-            <span>Option 3</span>
-          </menu-item>
-        </Menu>
+        <left-sider :isCollapsed="isCollapsed"></left-sider>
       </i-sider>
       <i-layout>
         <Header :style="{background: '#fff', boxShadow: '0 2px 3px 2px rgba(0,0,0,.1)'}"></Header>
@@ -64,20 +52,15 @@
     </i-layout>
   </div>
 </template>
+
 <script>
+import LeftSider from '@/components/LeftSider'
 export default {
   data () {
     return {
       isCollapsed: false
     }
   },
-  computed: {
-    menuitemClasses: function () {
-      return [
-        'menu-item',
-        this.isCollapsed ? 'collapsed-menu' : ''
-      ]
-    }
-  }
+  components: { LeftSider }
 }
 </script>
