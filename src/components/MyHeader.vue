@@ -3,7 +3,7 @@
     .logo {
       h1 {
         display: inline-block;
-        // font-size: 30px;
+        font-size: 30px;
       }
     }
   }
