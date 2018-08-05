@@ -1,13 +1,12 @@
 <style>
-
 </style>
 
 <template>
-    <div>PageNotFind</div>
+  <div>PageNotFind</div>
 </template>
 
 <script>
 export default {
-
+  name: 'PageNotFind'
 }
 </script>

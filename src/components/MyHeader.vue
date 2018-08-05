@@ -1,10 +1,26 @@
 <style lang="less" scoped>
   .myHeader {
     .logo {
+      padding: 0 20px;
       h1 {
         display: inline-block;
         // font-size: 30px;
       }
+    }
+    .dropDownA {
+      color: #495060;
+      display: inline-block;
+      font-size: 16px;
+      padding: 0 20px;
+      transition: background-color 0.3s, color 0.3s;
+
+    }
+    .dropDownA:hover {
+      background: #495060;
+      color: #fff;
+    }
+    .user {
+      padding: 0 20px;
     }
   }
 </style>
@@ -16,19 +32,20 @@
       <span>自定义导航专家</span>
     </div>
     <Dropdown v-for="data in dropDownData" :key="data.id">
-      <a href="javascript:void(0)">{{ data.title }}</a>
+      <a class="dropDownA" href="javascript:void(0)">{{ data.title }}</a>
       <DropdownMenu slot="list" v-if="data.items" v-for="item in data.items" :key="item.id">
           <DropdownItem :disabled="item.disabled" :divided="item.divided" >{{ item.name }}</DropdownItem>
       </DropdownMenu>
     </Dropdown>
     <div class="user fr">
-      <i-avatar icon="person" size="default"/>
+      <Avatar icon="person" size="default"/>
     </div>
   </div>
 </template>
 
 <script>
 export default {
+  name: 'MyHeader',
   data () {
     return {
       dropDownData: {

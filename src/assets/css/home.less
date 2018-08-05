@@ -1,0 +1,41 @@
+﻿.center {
+    margin: 0 auto;
+    @media (max-width: 768px) {
+        margin: 0 2%;
+        width: 96%;
+    }
+    @media (min-width: 769px) {
+        width: 750px;
+    }
+    @media (min-width: 992px) {
+        width: 970px;
+    }
+    @media (min-width: 1200px) {
+        width: 1170px;
+    }
+}
+.fixDiv {
+    background: rgba(0,0,0,0.6);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1001;
+}
+
+.divitionBox {
+    height: 100%;
+    position: relative;
+    >.leftBar,
+    >.rightBar {
+        height: 100%;
+        position: absolute;
+        transition: width 0.3s;
+        overflow: hidden;
+    }
+    >.mainPart {
+        height: 100%;
+        transition: width 0.3s;
+    }
+}

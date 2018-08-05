@@ -1,31 +1,20 @@
-<style lang="less">
-  .fill {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-  }
-  .iHeader {
-    background: #fff;
-    height: 50px;
-    line-height: 50px;
-    z-index: 1000;
-  }
+<style lang="less" scoped>
 </style>
 
 <template>
-  <i-layout class="fill">
-    <i-header class="iHeader">
+  <Layout class="fill">
+    <Header :style="style.iHeader">
       <my-header></my-header>
-    </i-header>
-    <i-layout>
-      <i-sider collapsible :collapsed-width="58" :width="150" v-model="isCollapsed">
+    </Header>
+    <Layout>
+      <Sider collapsible :collapsed-width="58" :width="150" v-model="isCollapsed">
         <left-sider :isCollapsed="isCollapsed"></left-sider>
-      </i-sider>
-      <Content :style="{padding:'5px'}">
+      </Sider>
+      <Content>
         <my-content></my-content>
       </Content>
-    </i-layout>
-  </i-layout>
+    </Layout>
+  </Layout>
 </template>
 
 <script>
@@ -34,10 +23,19 @@ import LeftSider from '@/components/LeftSider'
 import MyContent from '@/components/MyContent'
 
 export default {
+  name: 'Page-home',
   data () {
     return {
       isCollapsed: true,
       style: {
+        iHeader: {
+          background: '#fff',
+          boxShadow: '0 0 3px rgba(0,0,0,0.2)',
+          height: '50px',
+          lineHeight: '50px',
+          padding: '0',
+          zIndex: '1000'
+        }
       }
     }
   },
