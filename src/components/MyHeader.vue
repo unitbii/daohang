@@ -4,7 +4,7 @@
       padding: 0 20px;
       h1 {
         display: inline-block;
-        // font-size: 30px;
+        font-size: 30px;
       }
     }
     .dropDownA {
