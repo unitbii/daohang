@@ -1,28 +1,28 @@
 <style lang="less" scoped>
-  .myHeader {
-    .logo {
-      padding: 0 20px;
-      h1 {
-        display: inline-block;
-        font-size: 30px;
-      }
-    }
-    .dropDownA {
-      color: #495060;
+.myHeader {
+  .logo {
+    padding: 0 20px;
+    h1 {
       display: inline-block;
-      font-size: 16px;
-      padding: 0 20px;
-      transition: background-color 0.3s, color 0.3s;
-
-    }
-    .dropDownA:hover {
-      background: #495060;
-      color: #fff;
-    }
-    .user {
-      padding: 0 20px;
+      font-size: 30px;
     }
   }
+  .dropDownA {
+    color: #495060;
+    display: inline-block;
+    font-size: 16px;
+    padding: 0 20px;
+    transition: background-color 0.3s, color 0.3s;
+
+  }
+  .dropDownA:hover {
+    background: #495060;
+    color: #fff;
+  }
+  .user {
+    padding: 0 20px;
+  }
+}
 </style>
 
 <template>
@@ -31,9 +31,9 @@
       <h1>Dao航</h1>
       <span>自定义导航专家</span>
     </div>
-    <Dropdown v-for="data in dropDownData" :key="data.id">
+    <Dropdown v-for="data in navData" :key="data.id">
       <a class="dropDownA" href="javascript:void(0)">{{ data.title }}</a>
-      <DropdownMenu slot="list" v-if="data.items" v-for="item in data.items" :key="item.id">
+      <DropdownMenu slot="list" v-for="item in data.items" :key="item.id">
           <DropdownItem :disabled="item.disabled" :divided="item.divided" >{{ item.name }}</DropdownItem>
       </DropdownMenu>
     </Dropdown>
@@ -48,7 +48,7 @@ export default {
   name: 'MyHeader',
   data () {
     return {
-      dropDownData: {
+      navData: {
         1: {
           id: '1',
           title: '社区',

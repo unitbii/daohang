@@ -26,7 +26,7 @@ export default {
   name: 'Page-home',
   data () {
     return {
-      isCollapsed: true,
+      isCollapsed: true, // 边栏初始状态（折叠）
       style: {
         iHeader: {
           background: '#fff',

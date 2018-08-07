@@ -1,8 +1,8 @@
 <style lang="less" scoped>
-.r_topLine {
+.topLine {
   border: 1px dashed #fff;
   padding: 2px;
-  // margin: 1em 0 6px;
+  margin-bottom: 5px;
   li {
     background-color: rgba(255,255,255,.2);
     border: 1px solid #fff;
@@ -83,7 +83,7 @@
 </style>
 
 <template>
-  <ul class="r_topLine yrow">
+  <ul class="topLine yrow">
     <li :class="{normal:li_normal, editing:li_edit}" v-for="id in repository.topLine.content" :key="id">
       <a :href="tags[id].href">
         <img :src="img.star02">

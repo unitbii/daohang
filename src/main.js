@@ -7,8 +7,11 @@ import router from './router'
 import iView from 'iview'
 import 'iview/dist/styles/iview.css'
 
-import '@/style/index.less'
-// import '@/style/my-theme/index.less'
+// import '@/assets/css/reset.css'
+// import '@/assets/css/type.css'
+import '@/assets/css/index.less'
+
+// import '@/assets/css/my-theme/index.less'
 
 Vue.config.productionTip = false
 

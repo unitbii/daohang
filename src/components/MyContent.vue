@@ -1,9 +1,8 @@
 <style lang="less" scoped>
-  .myContent {
-    background: #96a066;
-    padding: 5px;
-    height: 100%;
-  }
+.myContent {
+  background: #96a066;
+  height: 100%;
+}
 </style>
 
 <template>
@@ -19,6 +18,7 @@
 import Folder from '@/components/Folder/index'
 
 export default {
+  name: 'MyContent',
   data () {
     return {}
   },
