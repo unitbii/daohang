@@ -1,14 +1,21 @@
 <style lang="less" scoped>
 .myHeader {
+  background: #F5F7F9;
+  height: 50px;
+  line-height: 50px;
   .logo {
     padding: 0 20px;
     h1 {
       display: inline-block;
-      font-size: 30px;
+      font-size: 22px;
+      font-weight: 700;
+    }
+    .description {
+        color: #666;
     }
   }
   .dropDownA {
-    color: #495060;
+    color: #232326;
     display: inline-block;
     font-size: 16px;
     padding: 0 20px;
@@ -16,7 +23,7 @@
 
   }
   .dropDownA:hover {
-    background: #495060;
+    background: #232326;
     color: #fff;
   }
   .user {
@@ -29,9 +36,9 @@
   <div class="myHeader">
     <div class="logo fl">
       <h1>Dao航</h1>
-      <span>自定义导航专家</span>
+      <span class="description">自定义导航专家</span>
     </div>
-    <Dropdown v-for="data in navData" :key="data.id">
+    <Dropdown class=" fl" v-for="data in navData" :key="data.id">
       <a class="dropDownA" href="javascript:void(0)">{{ data.title }}</a>
       <DropdownMenu slot="list" v-for="item in data.items" :key="item.id">
           <DropdownItem :disabled="item.disabled" :divided="item.divided" >{{ item.name }}</DropdownItem>
@@ -40,10 +47,13 @@
     <div class="user fr">
       <Avatar icon="person" size="default"/>
     </div>
+    <search-box class="fr"></search-box>
   </div>
 </template>
 
 <script>
+import SearchBox from '@/components/Plugins/SearchBox'
+
 export default {
   name: 'MyHeader',
   data () {
@@ -80,6 +90,7 @@ export default {
         }
       }
     }
-  }
+  },
+  components: { SearchBox }
 }
 </script>

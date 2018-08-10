@@ -1,123 +1,10 @@
-<template>
-  <div class="floor_02">
-    <template v-for="(id_1, index) in r.content" v-if="index==r_active_floder">
-      <template v-if="folders[id_1].content.length>0">
-        <section class="section_f2" v-for="id_2 in folders[id_1].content" :key="id_2">
-          <header @click="slideToggle">
-            <h3>{{ folders[id_2].title }}</h3>
-          </header>
-          <div class="floor_03" :data-height="floor_03_height" :style="floor_03_styel">
-            <nav class="yrow">
-              <template v-for="tid in folders[id_2].content">
-                <a v-if="tags[tid].title" :href="tags[tid].href" :data-desp="tags[tid].desp" :key="tid">
-                  <img class="d-img" :src="img.label"><span>{{ tags[tid].title }}</span>
-                  <span class="info">
-                    <span class="title">{{ tags[tid].title }}</span><span class="desp" v-if="tags[tid].desp"> | {{ tags[tid].desp }}</span><br/>
-                    <span class="url">{{ tags[tid].href }}</span>
-                  </span>
-                </a>
-              </template>
-            </nav>
-            <div class="showMore" @click="slideToggle">
-              <span class="img">...</span>
-              <span class="bg"></span>
-            </div>
-          </div>
-        </section>
-      </template>
-      <template v-else>
-        空页面
-      </template>
-    </template>
-  </div>
-</template>
-
-<script>
-import $ from 'jquery'
-
-function showMore ($ele) {
-  $ele = $($ele)
-  if (!$ele.hasClass('floor_03')) {
-    $ele = $ele.find('.floor_03')
-  }
-  $ele.each(function () {
-    var $t = $(this)
-    var height = $t.outerHeight()
-    var navHeight = $t.find('nav').outerHeight()
-    var $showMore = $t.find('.showMore')
-    if (height === navHeight) {
-      $showMore.hide()
-    } else {
-      $showMore.show()
-    }
-  })
-}
-window.onload = function () {
-  showMore('.floor_02')
-}
-
-export default {
-  name: 'Floor02',
-  data () {
-    return {
-      img: {
-        label: require('@/assets/images/1688-label.png')
-      },
-      floor_03_height: '40'
-    }
-  },
-  props: ['data', 'toolStatus'],
-  computed: {
-    r: function () {
-      return this.data.repositorys[this.data.active_repository]
-    },
-    tags: function () {
-      return this.r.tags
-    },
-    folders: function () {
-      return this.r.folders
-    },
-    r_active_floder: function () {
-      return this.r.active_floder
-    },
-    floor_03_styel: function () {
-      return {
-        'height': this.floor_03_height + 'px',
-        'min-height': this.floor_03_height + 'px'
-      }
-    }
-  },
-  methods: {
-    slideToggle: function (e) {
-      var $ele = $(e.target).parents('section').find('.floor_03')
-      var height = parseInt($ele.attr('data-height'))
-      var navHeight = $ele.find('nav').outerHeight()
-      if (height === navHeight) return
-      if (height === $ele.outerHeight()) {
-        $ele.css({'height': navHeight})
-        $ele.find('.showMore').hide(300)
-      } else {
-        $ele.css({'height': height})
-        $ele.find('.showMore').show(300)
-      }
-    }
-  },
-  watch: {
-    r_active_floder: function () {
-      setTimeout(function () {
-        showMore('.floor_02')
-      }, 10)
-    }
-  }
-}
-</script>
-
-<style scoped lang="less">
+<style lang="less" scoped >
 .floor_02 {
-  margin-left:16%;
-  @media (max-width: 768px) {
-    margin-left: 0;
-  }
+  // background: #292929;
+  background: #dedcd1;
+  height: 100%;
+  padding: 10px;
+  overflow-y: scroll;
   section {
     @padding-left: 1.6%;
     header {
@@ -167,33 +54,6 @@ export default {
       }
       a:hover {
         color: #f18;
-        .info {
-          // display: block;
-        }
-      }
-      .showMore {
-        display: none;
-        width: 18px;
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        cursor: pointer;
-        .img {
-          color: #bbb;
-          line-height: 22px;
-          position: relative;
-          left: 4px;
-          z-index: 2;
-        }
-        .bg {
-          border-radius: 50%;
-          width: 36px;
-          height: 36px;
-          background: #ddd;
-          position: absolute;
-          right: -18px;
-          bottom: -18px;
-        }
       }
     }
     .floor_03.full {
@@ -207,5 +67,98 @@ export default {
       }
     }
   }
+  @padding-left: 1.6%;
+  a {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    float: left;
+    line-height: 2.2em;
+    padding: 0 @padding-left;
+    margin: 0 10px 10px 0;
+    transition: box-shadow 0.2s;
+    .d-img {
+      width: 1em;
+      height: 1em;
+      margin: 0 .2em -2px 0;
+    }
+  }
+  a:hover {
+    box-shadow: 0 0 4px rgba(0,0,0, 0.2);
+  }
+}
+.floor_02::-webkit-scrollbar {
+  display: none;
 }
 </style>
+
+<template>
+  <div class="floor_02">
+    <template v-if="activeFloder && activeFloder.content.length > 0">
+      <Collapse :style="style.collapse" v-model="collapseShow">
+        <Panel :name="index.toString()" v-for="(fid, index) in activeFloder.content" :key="fid">
+          {{ folders[fid].title }}
+          <p slot="content">
+            <nav class=" yrow">
+              <a v-for="tid in folders[fid].content" :key="tid" v-if="tags[tid].title"
+                :href="tags[tid].href"
+                :data-desp="tags[tid].desp">
+                <Tooltip :delay="100" placement="top-start">
+                  <img class="d-img" :src="img.label">
+                  <span>{{ tags[tid].title }}</span>
+                  <div slot="content">
+                    <p v-if="tags[tid].desp">{{ tags[tid].desp }}</p>
+                    <p><i>{{ tags[tid].href  }}</i></p>
+                  </div>
+                </Tooltip>
+              </a>
+            </nav>
+          </p>
+        </Panel>
+      </Collapse>
+    </template>
+    <template v-else>
+      空页面
+    </template>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'Floor02',
+  data () {
+    return {
+      img: {
+        label: require('@/assets/images/1688-label.png')
+      },
+      collapseShow: '0',
+      style: {
+        collapse: {
+          // boxShadow: '0 1px 5px rgba(0,0,0,0.1)',
+          border: '1px solid #c1c1c1'
+        },
+        aaa: {
+          background: '#ccc',
+          margin: '0'
+        }
+      }
+    }
+  },
+  props: ['repository', 'toolStatus'],
+  computed: {
+    tags: function () {
+      return this.repository.tags
+    },
+    folders: function () {
+      return this.repository.folders
+    },
+    activeFloder: function () {
+      return this.folders[this.repository.activeFloderId]
+    }
+  },
+  methods: {
+    tagsDesp: function (id) {
+      return this.tags[id].href + ' | ' + this.tags[id].desp
+    }
+  }
+}
+</script>

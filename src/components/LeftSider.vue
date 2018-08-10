@@ -33,7 +33,9 @@
 </style>
 
 <template>
-  <Menu :active-name="menuData.activeName" :theme="menuData.theme" width="auto" :class="['menu-item', {'collapsed-menu': isCollapsed}]">
+  <Menu :active-name="menuData.activeName"
+    :theme="menuData.theme" width="auto"
+    :class="['menu-item', {'collapsed-menu': isCollapsed}]">
     <menu-item :name="item.name" v-for="item in menuData.items" :key="item.name">
       <Icon :type="item.iconType"></Icon>
       <span>{{ item.title }}</span>

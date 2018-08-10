@@ -1,34 +1,40 @@
-<style scoped lang="less">
+<style lang="less" scoped>
 @files_lineHeight: 40px;
 .files{
   // background: #fff;
-  box-shadow: 0 3px 6px rgba(0,0,0,.3);
   line-height: @files_lineHeight;
-  height: 100%;
-  min-height: @files_lineHeight * 12;
-  margin-bottom: 2em;
-  position: relative;
 }
 </style>
 
 <template>
-  <div class="files">
-    <!-- <floor01 :data="data" :toolStatus="toolStatus"></floor01> -->
-    <!-- <floor02 :data="data" :toolStatus="toolStatus"></floor02> -->
-  </div>
+  <layout class="files">
+    <Sider :collapsed-width="58" :width="150" :style="style.iSider">
+      <floor01 :repository="repository" :toolStatus="toolStatus"></floor01>
+    </Sider>
+    <Content>
+      <floor02 :repository="repository" :data="data" :toolStatus="toolStatus"></floor02>
+    </Content>
+  </layout>
 </template>
 
 <script>
-// import floor01 from '@/components/folderStyle/floor01'
-// import floor02 from '@/components/folderStyle/floor02'
+import floor01 from '@/components/Folder/floor01'
+import floor02 from '@/components/Folder/floor02'
 
 export default {
   name: 'Files',
   data () {
-    return {}
+    return {
+      style: {
+        iSider: {
+          boxShadow: '0 0 3px rgba(0,0,0,0.3)',
+          zIndex: '1890'
+        }
+      }
+    }
   },
   methods: {},
-  props: ['data', 'toolStatus']
-  // components: { floor01, floor02 }
+  props: ['repository', 'data', 'toolStatus'],
+  components: { floor01, floor02 }
 }
 </script>
