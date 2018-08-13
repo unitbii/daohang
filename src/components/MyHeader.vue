@@ -47,7 +47,7 @@
     <div class="user fr">
       <Avatar icon="person" size="default"/>
     </div>
-    <search-box class="fr"></search-box>
+    <search-box class="fr" :style="style.searchBox"></search-box>
   </div>
 </template>
 
@@ -62,7 +62,7 @@ export default {
         1: {
           id: '1',
           title: '社区',
-          items: false
+          items: {}
         },
         2: {
           id: '2',
@@ -87,6 +87,13 @@ export default {
               divided: true
             }
           }
+        }
+      },
+      style: {
+        searchBox: {
+          width: '30%',
+          height: '30px',
+          margin: '10px 20px'
         }
       }
     }

@@ -2,15 +2,6 @@
 .folder {
   font-size: 14px;
   height: 100%;
-  // width: 100%;
-  // position: absolute;
-  overflow-y: scroll;
-  .files{
-    line-height: 40px;
-  }
-}
-.folder::-webkit-scrollbar {
-  display: none;
 }
 </style>
 
@@ -21,7 +12,7 @@
       <top-line :repository="repository" :toolStatus="toolStatus"></top-line>
     </Header>
     <!-- 文件版面 -->
-    <Layout class="files">
+    <Layout>
       <Sider :width="150" :style="style.iSider">
         <folder-sider :repository="repository" :toolStatus="toolStatus"></folder-sider>
       </Sider>

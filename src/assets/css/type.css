@@ -43,9 +43,11 @@ button,input,select,textarea {outline:none;}
   height: 100%;
   position: absolute;
 }
-/* 垂直居中 */
+/* 垂直、水平居中 */
 .flex {
   display: flex;
+  align-items:center;
+  justify-content: center;
 }
 /* 省略号 */
 .ellipsis {

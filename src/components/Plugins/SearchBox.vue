@@ -1,9 +1,7 @@
 <style lang="less" scoped>
   .searchBox {
-    width: 30%;
-    height: 30px;
-    margin: 10px 20px;
     position: relative;
+    user-select:none;
     .search_form {
       width: 100%;
       height: 100%;
@@ -21,8 +19,8 @@
       }
       .search_control {
         width: 27%;
-        min-width: 64px;
-        max-width: 74px;
+        min-width: 60px;
+        max-width: 75px;
         height: 100%;
         position: absolute;
         top: 0;
@@ -31,20 +29,29 @@
           background-color: #3a3a3a;
           border: 0;
           color: #fff;
+          cursor: pointer;
           width: 100%;
-          padding: 0 14px 0 0;
+          padding-right: 20%;
           outline: 0;
         }
+        input[type=submit]:hover {
+          background-color: #478dca;
+        }
         .triangle {
+          background-color: #3a3a3a;
+          display: flex;
+          align-items:center;
+          justify-content: center;
           cursor: pointer;
           height: 100%;
-          padding: 12px 3px;
+          width: 20%;
           position: absolute;
           top: 0;
           right: 0;
           span {
             border: 4px solid transparent;
             border-top: 5px solid #fff;
+            border-bottom: none;
             display: block;
           }
         }
@@ -72,18 +79,22 @@
       }
     }
   }
+  .yrow:after {
+    content: "";
+    clear: both;
+    display: block;
+  }
 </style>
 
 <template>
   <div class="searchBox">
     <form class="search_form yrow" target="_blank">
-      <input type="text" :name="activeSE.name" placeholder="搜索..." @click="toggle">
+      <input type="text" :name="activeSE.name" placeholder="搜索...">
       <div class="search_control">
         <input type="submit" :formaction="activeSE.url" :value="activeSE.title">
         <div class="triangle" @click="toggle"><span></span></div>
         <ul class="SE_list" v-show="SE.list_show">
-          <li v-for="(SE, key) in SE.list" :key="key"
-            @click="switchSE(key)">
+          <li v-for="(SE, key) in SE.list" :key="key" @click="switchSE(key)">
             {{ SE.title }}
           </li>
         </ul>
@@ -128,10 +139,21 @@ export default {
   methods: {
     switchSE (key) {
       this.SE.actived = key
-      this.toggle()
     },
     toggle () {
-      this.SE.list_show = !this.SE.list_show
+      if (this.SE.list_show) {
+        this.SE.list_show = false
+      } else {
+        this.SE.list_show = true
+        setTimeout(() => {
+          const body = document.getElementsByTagName('body')[0]
+          const close = () => {
+            this.SE.list_show = false
+            body.removeEventListener('click', close)
+          }
+          body.addEventListener('click', close)
+        }, 100)
+      }
     }
   }
 }

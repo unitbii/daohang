@@ -4,6 +4,7 @@
   background: #dedcd1;
   height: 100%;
   padding: 10px;
+  padding-bottom: 50px;
   overflow-y: scroll;
   section {
     @padding-left: 1.6%;
@@ -115,6 +116,7 @@
           </p>
         </Panel>
       </Collapse>
+      <my-collapse :repository="repository"></my-collapse>
     </template>
     <template v-else>
       空页面
@@ -123,6 +125,7 @@
 </template>
 
 <script>
+import MyCollapse from '@/components/Plugins/MyCollapse'
 export default {
   name: 'Floor02',
   data () {
@@ -133,17 +136,13 @@ export default {
       collapseShow: '0',
       style: {
         collapse: {
-          // boxShadow: '0 1px 5px rgba(0,0,0,0.1)',
           border: '1px solid #c1c1c1'
-        },
-        aaa: {
-          background: '#ccc',
-          margin: '0'
         }
       }
     }
   },
   props: ['repository', 'toolStatus'],
+  components: { MyCollapse },
   computed: {
     tags: function () {
       return this.repository.tags
@@ -156,9 +155,6 @@ export default {
     }
   },
   methods: {
-    tagsDesp: function (id) {
-      return this.tags[id].href + ' | ' + this.tags[id].desp
-    }
   }
 }
 </script>
