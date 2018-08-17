@@ -116,10 +116,13 @@
           </p>
         </Panel>
       </Collapse>
-      <my-collapse :repository="repository"></my-collapse>
+      
+      <my-collapse :style="style.collapse" :repository="repository"></my-collapse>
+      
     </template>
     <template v-else>
       空页面
+      <router-link to='/user'>Go to user</router-link>
     </template>
   </div>
 </template>
@@ -136,7 +139,10 @@ export default {
       collapseShow: '0',
       style: {
         collapse: {
-          border: '1px solid #c1c1c1'
+          border: '1px solid #c1c1c1',
+          borderRadius: '4px',
+          marginBottom: '10px',
+          overflow: 'hidden'
         }
       }
     }

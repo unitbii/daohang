@@ -47,7 +47,7 @@
 
 <template>
   <span :class="['iconArrows', {'slide': slide, 'cursor': cursor}]">
-    <span><span class="top"></span></span>
+    <span><span class="right" :style="style.span"></span></span>
   </span>
 </template>
 
@@ -55,16 +55,36 @@
 export default {
   name: 'Arrows',
   data () {
-    return {}
+    return {
+      style: {
+        span: {
+          borderTop: this.borderWidth + ' solid ' + this.borderColor,
+          borderRight: this.borderWidth + ' solid ' + this.borderColor,
+          width: this.arrowsSize,
+          height: this.arrowsSize
+        }
+      }
+    }
   },
   props: {
-    arrowsColor: {
+    borderColor: {
       type: String,
-      default: '#888'
+      default: '#555'
+    },
+    borderWidth: {
+      type: String,
+      default: '1px'
+    },
+    arrowsSize: {
+      type: String,
+      default: '0.6em'
     },
     slide: Boolean,
     cursor: Boolean
   },
-  computed: {}
+  computed: {},
+  methods: {
+    rotate () {}
+  }
 }
 </script>
