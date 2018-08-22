@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import tagData from '@/assets/js/data.js'
+import tagData from '@/data/data.js'
 
 import TopLine from '@/components/Folder/topLine'
 import FolderSider from '@/components/Folder/floor01'

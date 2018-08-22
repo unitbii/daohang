@@ -116,9 +116,7 @@
           </p>
         </Panel>
       </Collapse>
-      
       <my-collapse :style="style.collapse" :repository="repository"></my-collapse>
-      
     </template>
     <template v-else>
       空页面
