@@ -47,7 +47,7 @@
 
 <template>
   <span :class="['iconArrows', {'slide': slide, 'cursor': cursor}]">
-    <span><span class="right" :style="style.span"></span></span>
+    <span><span :class="spanStyle" :style="style.span"></span></span>
   </span>
 </template>
 
@@ -60,8 +60,8 @@ export default {
         span: {
           borderTop: this.borderWidth + ' solid ' + this.borderColor,
           borderRight: this.borderWidth + ' solid ' + this.borderColor,
-          width: this.arrowsSize,
-          height: this.arrowsSize
+          width: this.size,
+          height: this.size
         }
       }
     }
@@ -75,16 +75,20 @@ export default {
       type: String,
       default: '1px'
     },
-    arrowsSize: {
+    size: {
       type: String,
       default: '0.6em'
     },
     slide: Boolean,
-    cursor: Boolean
+    cursor: Boolean,
+    isCollapsed: Boolean
   },
-  computed: {},
+  computed: {
+    spanStyle () {
+      return {'right': this.isCollapsed, 'bottom': !this.isCollapsed}
+    }
+  },
   methods: {
-    rotate () {}
   }
 }
 </script>

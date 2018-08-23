@@ -23,7 +23,10 @@
 <template>
   <div class="myCollapse">
     <section v-for="fid in activeFloder.content" :key="fid">
-      <div class="header"><icon-arrows slide></icon-arrows>{{ folders[fid].title }}</div>
+      <div class="header" @click="toggleCollapse(fid)">
+        <icon-arrows slide :isCollapsed="collapseStatus[fid].isCollapsed"></icon-arrows>
+        {{ folders[fid].title }}
+      </div>
       <div class="content">1111</div>
     </section>
   </div>
@@ -35,7 +38,9 @@ import IconArrows from '@/components/Icon/Arrows'
 export default {
   name: 'MyCollapse',
   data () {
-    return {}
+    return {
+      isCollapsed: true // 边栏初始状态（折叠）
+    }
   },
   props: ['repository'],
   components: { IconArrows },
@@ -48,6 +53,32 @@ export default {
     },
     activeFloder: function () {
       return this.folders[this.repository.activeFloderId]
+    },
+    collapseStatus () {
+      let obj = {}
+      this.activeFloder.content.forEach((id) => {
+        obj[id] = {
+          isCollapsed: this.isCollapsed
+        }
+      })
+      return obj
+    }
+  },
+  methods: {
+    toggleCollapse (fid) {
+      this.collapseStatus[fid].isCollapsed = !this.collapseStatus[fid].isCollapsed
+      // this.isCollapsed = !this.isCollapsed
+      console.log(this.collapseStatus)
+    },
+    getCollapseStatus (fid) {
+
+    }
+  },
+  mounted () {
+  },
+  watch: {
+    collapseStatus (newq, oldq) {
+      console.log(newq, oldq)
     }
   }
 }
