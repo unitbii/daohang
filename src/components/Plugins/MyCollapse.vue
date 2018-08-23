@@ -3,7 +3,8 @@
     color: #666;
     line-height: 38px;
     section {
-      border-bottom: 1px solid #d1d1d1;
+      border-top: 1px solid #d1d1d1;
+      user-select:none;
       .header {
         background: #f1f1f1;
         color: #666;
@@ -12,10 +13,26 @@
         line-height: 38px;
         padding: 0 22px;
       }
+      .header:hover {
+        background: #f6f6f6;
+      }
+      .header:active {
+        background: #f6f6f6;
+      }
       .content {
         background: #fff;
+        height: 38px;
         padding: 0 16px;
+        overflow: hidden;
+        transition: height 0.2s;
       }
+      .content.isCollapsed {
+        height: 0;
+        // display: none;
+      }
+    }
+    section:first-child {
+      border-top: 0;
     }
   }
 </style>
@@ -27,18 +44,20 @@
         <icon-arrows slide :isCollapsed="collapseStatus[fid].isCollapsed"></icon-arrows>
         {{ folders[fid].title }}
       </div>
-      <div class="content">1111</div>
+      <div :class="['content', {'isCollapsed': collapseStatus[fid].isCollapsed}]" >1111</div>
     </section>
   </div>
 </template>
 
 <script>
 import IconArrows from '@/components/Icon/Arrows'
+import { clone } from '@/lib/y_utils'
 
 export default {
   name: 'MyCollapse',
   data () {
     return {
+      collapseStatus: {},
       isCollapsed: true // 边栏初始状态（折叠）
     }
   },
@@ -53,33 +72,20 @@ export default {
     },
     activeFloder: function () {
       return this.folders[this.repository.activeFloderId]
-    },
-    collapseStatus () {
-      let obj = {}
-      this.activeFloder.content.forEach((id) => {
-        obj[id] = {
-          isCollapsed: this.isCollapsed
-        }
-      })
-      return obj
     }
   },
   methods: {
     toggleCollapse (fid) {
       this.collapseStatus[fid].isCollapsed = !this.collapseStatus[fid].isCollapsed
-      // this.isCollapsed = !this.isCollapsed
-      console.log(this.collapseStatus)
-    },
-    getCollapseStatus (fid) {
-
+      // 我还必须克隆一个新的obj，再覆盖原来的对象，才能更新= =
+      let newObj = clone(this.collapseStatus)
+      this.collapseStatus = newObj
     }
   },
-  mounted () {
-  },
-  watch: {
-    collapseStatus (newq, oldq) {
-      console.log(newq, oldq)
-    }
+  created () {
+    this.activeFloder.content.forEach((id) => {
+      this.collapseStatus[id] = {isCollapsed: this.isCollapsed}
+    })
   }
 }
 </script>

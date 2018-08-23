@@ -1,5 +1,15 @@
 /* 重写基础工具 */
 
+// 克隆对象
+export function clone (myObj) {
+  if (typeof myObj !== 'object' || myObj === null) return myObj
+  let myNewObj = {}
+  for (let i in myObj) {
+    myNewObj[i] = clone(myObj[i])
+  }
+  return myNewObj
+}
+
 // 通用判断法
 export function checked (data) {
   // 为不同类型做特殊处理
@@ -14,8 +24,9 @@ export function checked (data) {
       return data
   }
 }
-export function v_debug (debug = 'debug', key = 'true') {
-  return getLocationSearch(window.location.search, debug) === key ? true : false
+//
+export function debug (debug = 'debug', key = 'true') {
+  return getLocationSearch(window.location.search, debug) === key
 }
 
 // 通过query字符串，获取query数据
@@ -34,11 +45,17 @@ export function getLocationSearch (string, mykey) {
 // 判断终端类型
 export const checkTerminalType = () => {
   let u = navigator.userAgent
-  let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1 //android终端
-  let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/) //ios终端
+  let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1 // android终端
+  let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/) // ios终端
   let isPC = !/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)
-  if(isPC) return 'pc'
-  if(isAndroid) return 'android'
-  if(isiOS) return 'ios'
+  if (isPC) {
+    return 'pc'
+  }
+  if (isAndroid) {
+    return 'android'
+  }
+  if (isiOS) {
+    return 'ios'
+  }
   return 'other'
 }
