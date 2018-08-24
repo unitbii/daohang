@@ -3,7 +3,7 @@
   repositorys: {
     1: {
       name: '收藏1',
-      activeFloderId: 2002,
+      active_floder: 2002,
       re_date: 1, // last_modified
       topLine: {
         re_date: 1,

@@ -1,6 +1,6 @@
 <style lang="less" scoped>
 .myHeader {
-  background: #F5F7F9;
+  background: #fff;
   height: 50px;
   line-height: 50px;
   .option {
@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import SearchBox from '@/components/Plugins/SearchBox'
+import SearchBox from '@/components/base/SearchBox'
 
 export default {
   name: 'MyHeader',

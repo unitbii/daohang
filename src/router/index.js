@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '@/components/Page-home'
-import User from '@/components/Page-user'
-import PageNotFind from '@/components/PageNotFind'
+import Home from '@/components/page/Page-home'
+import User from '@/components/page/Page-user'
+import PageNotFind from '@/components/page/PageNotFind'
 
 Vue.use(Router)
 

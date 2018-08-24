@@ -84,7 +84,9 @@ export default {
       type: String,
       default: '0.6em'
     },
-    rotate: { // 旋转方向，方向可以选择top/right/bottom/left，用‘-’连接，首方向为折叠方向
+    // 旋转方向，方向可以选择top/right/bottom/left
+    // 如果选两个方向，用'-'相接，首方向为折叠方向，尾
+    rotate: {
       type: String,
       default: 'right-bottom'
     },
@@ -95,19 +97,36 @@ export default {
   computed: {
     spanStyle () {
       let style = {'slide': this.slide}
-      style[this.start] = this.isCollapsed
-      style[this.end] = !this.isCollapsed
+      if (this.end === '') {
+        style[this.start] = true
+      } else {
+        style[this.start] = this.isCollapsed
+        style[this.end] = !this.isCollapsed
+      }
       return style
     }
   },
   methods: {
     check_rotate () {
-      if (!this.rotate || this.rotate.indexOf('-') === -1) return
-      let list = this.rotate.split('-')
+      // if (!this.rotate || this.rotate.indexOf('-') === -1) return
+      // let list = this.rotate.split('-')
+      // let reg = /^top$|^right$|^bottom$|^left$/
+      // if (reg.test(list[0]) && reg.test(list[1])) {
+      //   this.start = list[0]
+      //   this.end = list[1]
+      // }
       let reg = /^top$|^right$|^bottom$|^left$/
-      if (reg.test(list[0]) && reg.test(list[1])) {
-        this.start = list[0]
-        this.end = list[1]
+      if (this.rotate && this.rotate.indexOf('-') !== -1) {
+        let list = this.rotate.split('-')
+        if (reg.test(list[0]) && reg.test(list[1])) {
+          this.start = list[0]
+          this.end = list[1]
+        }
+      } else {
+        if (reg.test(this.rotate)) {
+          this.start = this.rotate
+          this.end = ''
+        }
       }
     }
   },

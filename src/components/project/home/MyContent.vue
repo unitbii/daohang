@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import Folder from '@/components/Folder/folder'
+import Folder from '@/components/project/Folder/folder'
 
 export default {
   name: 'MyContent',

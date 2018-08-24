@@ -18,9 +18,9 @@
 </template>
 
 <script>
-import MyHeader from '@/components/home/MyHeader'
-import LeftSider from '@/components/home/LeftSider'
-import MyContent from '@/components/home/MyContent'
+import MyHeader from '@/components/project/home/MyHeader'
+import LeftSider from '@/components/project/home/LeftSider'
+import MyContent from '@/components/project/home/MyContent'
 
 export default {
   name: 'Page-home',

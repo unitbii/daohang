@@ -15,8 +15,8 @@
     transition: background-color 0.3s, color 0.3s;
   }
   li.on {
-    background: #333;
-    box-shadow: 0 0 3px rgba(255,255,255,0.5);
+    background: #3a3a3a;
+    box-shadow: 0 0 4px rgba(255,255,255,0.3);
     line-height: @files_line-height - 2;
     margin-top: 2px;
     position: relative;
