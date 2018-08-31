@@ -14,6 +14,10 @@
       border-radius: 4px;
       margin-bottom: 10px;
       overflow: hidden;
+      nav {
+        background: #fff;
+        padding: 2px 6px;
+      }
     }
   }
   .floor02::-webkit-scrollbar {
@@ -37,8 +41,12 @@
       <Content>
         <div class="floor02">
           <div class="content" v-if="activeFloder && activeFloder.content.length > 0">
-            <my-collapse v-for="fid in activeFloder.content" :key="fid"
-              :repository="repository" :fid="fid"></my-collapse>
+            <my-collapse v-for="fid in activeFloder.content" :key="fid" :title="folders[fid].title">
+              <nav class="yrow">
+                <tag v-for="tid in folders[fid].content" :key="tid"
+                  :tags="tags" :tid="tid"></tag>
+              </nav>
+            </my-collapse>
           </div>
           <div v-else>空页面</div>
         </div>
@@ -52,7 +60,9 @@ import tagData from '@/data/data.js'
 
 import TopLine from '@/components/project/Folder/topLine'
 import FolderSider from '@/components/project/Folder/folderSider'
+
 import MyCollapse from '@/components/public/MyCollapse'
+import Tag from '@/components/public/Tag'
 
 export default {
   name: 'Folder',
@@ -85,8 +95,14 @@ export default {
     },
     activeFloder: function () {
       return this.repository.folders[this.repository.active_floder]
+    },
+    folders: function () {
+      return this.repository.folders
+    },
+    tags: function () {
+      return this.repository.tags
     }
   },
-  components: { TopLine, FolderSider, MyCollapse }
+  components: { TopLine, FolderSider, MyCollapse, Tag }
 }
 </script>

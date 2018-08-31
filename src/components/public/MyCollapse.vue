@@ -5,7 +5,7 @@
     line-height: @unit_height;
     user-select:none;
     .header {
-      background: #e2e6b9;
+      background: #dfe2a9;
       cursor: pointer;
       height: @unit_height;
       line-height: @unit_height;
@@ -15,9 +15,7 @@
       background: #d6dba7;
     }
     .content {
-      background: #fff;
       max-height: @unit_height*4;
-      padding: 2px 6px;
       overflow: hidden;
       transition: max-height ease-in 0.25s;
     }
@@ -36,20 +34,16 @@
     <section class="myCollapse">
       <div class="header" @click="toggle">
         <icon-arrows slide :isCollapsed="isCollapsed"></icon-arrows>
-        {{ folders[fid].title }}
+        {{ title }}
       </div>
       <div :class="['content', {'isCollapsed': isCollapsed}]" >
-        <nav class="yrow">
-          <tag v-for="tid in folders[fid].content" :key="tid"
-            :tags="tags" :tid="tid"></tag>
-        </nav>
+        <slot></slot>
       </div>
     </section>
 </template>
 
 <script>
 import IconArrows from '@/components/base/Icon/Arrows'
-import Tag from '@/components/public/Tag'
 
 export default {
   name: 'MyCollapse',
@@ -58,16 +52,8 @@ export default {
       isCollapsed: true // 边栏初始状态（折叠）
     }
   },
-  props: ['repository', 'fid'],
-  components: { IconArrows, Tag },
-  computed: {
-    folders: function () {
-      return this.repository.folders
-    },
-    tags: function () {
-      return this.repository.tags
-    }
-  },
+  props: ['title'],
+  components: { IconArrows },
   methods: {
     toggle () {
       this.isCollapsed = !this.isCollapsed

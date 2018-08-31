@@ -2,7 +2,7 @@
 // 想要点击旋转，请在父级组件写 @click 并修改传入参数 isCollapsed
 
 <style lang="less" scoped>
-  .iconArrows {
+  div {
     display: inline-block;
     line-height: 100%;
     width: 1.2em;
@@ -49,9 +49,9 @@
 </style>
 
 <template>
-  <span :class="['iconArrows', {'cursor': cursor}]">
+  <div :class="{'cursor': cursor}">
     <span><span :class="spanStyle" :style="style.span"></span></span>
-  </span>
+  </div>
 </template>
 
 <script>
@@ -106,15 +106,11 @@ export default {
       return style
     }
   },
+  created () {
+    this.check_rotate()
+  },
   methods: {
     check_rotate () {
-      // if (!this.rotate || this.rotate.indexOf('-') === -1) return
-      // let list = this.rotate.split('-')
-      // let reg = /^top$|^right$|^bottom$|^left$/
-      // if (reg.test(list[0]) && reg.test(list[1])) {
-      //   this.start = list[0]
-      //   this.end = list[1]
-      // }
       let reg = /^top$|^right$|^bottom$|^left$/
       if (this.rotate && this.rotate.indexOf('-') !== -1) {
         let list = this.rotate.split('-')
@@ -129,9 +125,6 @@ export default {
         }
       }
     }
-  },
-  created () {
-    this.check_rotate()
   }
 }
 </script>

@@ -70,7 +70,7 @@
 <template>
   <ul class="floor_01">
     <li v-for="id in repository.content" :key="id"
-      :class="{'on': id == repository.activeFloderId, 'disabled': false}"
+      :class="{'on': id == repository.active_floder, 'disabled': false}"
       @click="switchFloor(id)">
       <h3 class=" ellipsis">{{ folders[id].title }}</h3>
     </li>
@@ -105,7 +105,7 @@ export default {
   },
   methods: {
     switchFloor: function (id) {
-      this.repository.activeFloderId = id
+      this.repository.active_floder = id
     },
     edit: function () {
       if (this.toolStatus.edit) {

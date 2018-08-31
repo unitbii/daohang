@@ -1,10 +1,10 @@
 <style lang="less" scoped>
   a {
-    border: 1px solid #fff;
+    // border: 1px solid #fff;
     border-radius: 4px;
     color: #333;
     float: left;
-    line-height: 28px;
+    line-height: 30px;
     padding: 0 1.6%;
     margin: 2px;
     transition: box-shadow 0.2s;
@@ -20,7 +20,7 @@
 </style>
 
 <template>
-  <a :href="tags[tid].href"  v-if="tags[tid].title">
+  <a :href="tags[tid].href" v-if="tags[tid].title" target="_blank" rel="noopener noreferrer">
     <Tooltip :delay="100" placement="top-start">
       <img class="d-img" :src="img.label">
       <span>{{ tags[tid].title }}</span>
