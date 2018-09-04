@@ -7,18 +7,16 @@
 
 <template>
   <div class="myContent">
-    <Folder></Folder>
+    {{ $route.params.id }}
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import Folder from '@/components/project/Folder/folder'
-
 export default {
   name: 'MyContent',
   data () {
     return {}
-  },
-  components: { Folder }
+  }
 }
 </script>

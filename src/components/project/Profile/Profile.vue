@@ -2,13 +2,13 @@
 </style>
 
 <template>
-  <div>user</div>
+  <div>用户配置页面</div>
 </template>
 
 <script>
 
 export default {
-  name: 'Page-user',
+  name: 'Profile',
   data () {
     return {
     }

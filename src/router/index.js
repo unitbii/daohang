@@ -1,7 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+
 import Home from '@/components/page/Page-home'
-import User from '@/components/page/Page-user'
+import Folder from '@/components/project/Folder/Folder'
+import Profile from '@/components/project/Profile/Profile'
+import AppList from '@/components/project/AppList/AppList'
+
+import Welcome from '@/components/page/Page-welcome'
 import PageNotFind from '@/components/page/PageNotFind'
 
 Vue.use(Router)
@@ -10,16 +15,38 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Home',
-      component: Home
-      // children: [
-      //   {path:'news',compontent:User}
-      // ]
+      name: 'homepage',
+      component: Home,
+      children: [
+        {
+          path: '',
+          component: Folder
+        }
+      ]
     },
     {
-      path: '/user',
-      name: 'User',
-      component: User
+      path: '/home',
+      name: 'Home',
+      component: Home,
+      children: [
+        {
+          path: 'folder',
+          component: Folder
+        },
+        {
+          path: 'appList',
+          component: AppList
+        },
+        {
+          path: 'profile',
+          component: Profile
+        }
+      ]
+    },
+    {
+      path: '/welcome',
+      name: 'Welcome',
+      component: Welcome
     },
     {
       path: '*',

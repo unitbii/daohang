@@ -36,8 +36,10 @@
     :theme="menuData.theme" width="auto"
     :class="['menu-item', {'collapsed-menu': isCollapsed}]">
     <menu-item :name="item.name" v-for="item in menuData.items" :key="item.name">
-      <Icon :type="item.iconType"></Icon>
-      <span>{{ item.title }}</span>
+      <!-- <router-link :to="item.name"> -->
+        <Icon :type="item.iconType"></Icon>
+        <span>{{ item.title }}</span>
+      <!-- </router-link> -->
     </menu-item>
   </Menu>
 </template>
@@ -49,20 +51,20 @@ export default {
     return {
       menuData: {
         theme: 'dark',
-        activeName: '1-2',
+        activeName: 'folder',
         items: {
-          '1-1': {
-            name: '1-1',
+          'appList': {
+            name: 'appList',
             iconType: 'ios-navigate',
             title: '应用'
           },
-          '1-2': {
-            name: '1-2',
+          'folder': {
+            name: 'folder',
             iconType: 'search',
             title: '导航'
           },
-          '1-3': {
-            name: '1-3',
+          'profile': {
+            name: 'profile',
             iconType: 'settings',
             title: '设置'
           }
