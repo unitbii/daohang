@@ -19,7 +19,7 @@ export function checked (data) {
     case 'string':
       return data === 'false' ? false : data // 字符串 false 判断为 false
     case 'object':
-      return Object.keys(data).length === 0 ? false : data // 对象的属性为0，判断为 false
+      return Object.keys(data).length === 0 ? false : data // 对象的属性个数为0，判断为 false
     default:
       return data
   }

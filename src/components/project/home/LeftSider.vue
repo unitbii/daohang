@@ -32,15 +32,14 @@
 </style>
 
 <template>
-  <Menu :active-name="menuData.activeName"
-    :theme="menuData.theme" width="auto"
-    :class="['menu-item', {'collapsed-menu': isCollapsed}]">
-    <menu-item :name="item.name" v-for="item in menuData.items" :key="item.name">
-      <!-- <router-link :to="item.name"> -->
+  <Menu :class="menuitemClasses"
+    :active-name="activeName" :theme="menuData.theme"
+    width="auto" @on-select="go">
+      <menu-item v-for="item in menuData.items" :key="item.name"
+        :name="item.name">
         <Icon :type="item.iconType"></Icon>
         <span>{{ item.title }}</span>
-      <!-- </router-link> -->
-    </menu-item>
+      </menu-item>
   </Menu>
 </template>
 
@@ -49,9 +48,9 @@ export default {
   name: 'LeftSider',
   data () {
     return {
+      basePath: 'home',
       menuData: {
         theme: 'dark',
-        activeName: 'folder',
         items: {
           'appList': {
             name: 'appList',
@@ -74,8 +73,22 @@ export default {
   },
   props: ['isCollapsed'],
   computed: {
-    menuitemClasses: function () {
-      return ['menu-item', this.isCollapsed ? 'collapsed-menu' : '']
+    menuitemClasses () {
+      return ['menu-item', {'collapsed-menu': this.isCollapsed}]
+    },
+    activeName () {
+      let pathArray = this.$route.path.split('/')
+      if (pathArray[1] === this.basePath) {
+        return pathArray[2]
+      }
+    }
+  },
+  methods: {
+    routerUrl (name) {
+      return `/${this.basePath}/${name}`
+    },
+    go (name) {
+      location.href = `/#/${this.basePath}/${name}`
     }
   }
 }
