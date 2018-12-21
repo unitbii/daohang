@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import IconArrows from '@/components/base/Icon/Arrows'
+import IconArrows from '@/components/Icon/Arrows'
 
 export default {
   name: 'MyCollapse',

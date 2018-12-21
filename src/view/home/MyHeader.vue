@@ -27,6 +27,11 @@
     color: #fff;
   }
 }
+.mySearchBox {
+  width: 30%;
+  height: 30px;
+  margin: 10px 20px;
+}
 </style>
 
 <template>
@@ -44,15 +49,16 @@
     <div class="user option fr">
       <Avatar icon="person" size="default"/>
     </div>
-    <search-box class="fr" :style="style.searchBox"></search-box>
+    <search-box class="mySearchBox fr"></search-box>
   </div>
 </template>
 
 <script>
-import SearchBox from '@/components/base/SearchBox'
+import SearchBox from '@/components/SearchBox/SearchBox'
 
 export default {
   name: 'MyHeader',
+  components: { SearchBox },
   data () {
     return {
       navData: {
@@ -85,16 +91,8 @@ export default {
             }
           }
         }
-      },
-      style: {
-        searchBox: {
-          width: '30%',
-          height: '30px',
-          margin: '10px 20px'
-        }
       }
     }
-  },
-  components: { SearchBox }
+  }
 }
 </script>

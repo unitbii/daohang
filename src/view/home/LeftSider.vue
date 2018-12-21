@@ -53,9 +53,9 @@ export default {
         theme: 'dark',
         items: {
           'appList': {
-            name: 'appList',
+            name: 'welcome',
             iconType: 'ios-navigate',
-            title: '应用'
+            title: '欢迎'
           },
           'folder': {
             name: 'folder',
@@ -84,11 +84,8 @@ export default {
     }
   },
   methods: {
-    routerUrl (name) {
-      return `/${this.basePath}/${name}`
-    },
     go (name) {
-      location.href = `/#/${this.basePath}/${name}`
+      location.href = `/#/${name}`
     }
   }
 }

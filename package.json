@@ -1,8 +1,8 @@
 {
   "name": "daohang",
   "version": "1.0.0",
-  "description": "A Vue.js project",
-  "author": "unitbii <toyfox@qq.com>",
+  "description": "自定义导航专家",
+  "author": "unitbii <23564275@qq.com>",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",

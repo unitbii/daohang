@@ -1,7 +1,9 @@
 <style lang="less" scoped>
 .folder {
   font-size: 14px;
+  width: 100%;
   height: 100%;
+  position: absolute;
   .floor02 {
     // background: #292929;
     background: #dedcd1;
@@ -41,12 +43,12 @@
       <Content>
         <div class="floor02">
           <div class="content" v-if="activeFloder && activeFloder.content.length > 0">
-            <my-collapse v-for="fid in activeFloder.content" :key="fid" :title="folders[fid].title">
+            <fold-card v-for="fid in activeFloder.content" :key="fid" :title="folders[fid].title">
               <nav class="yrow">
-                <tag v-for="tid in folders[fid].content" :key="tid"
-                  :tags="tags" :tid="tid"></tag>
+                <tag-card v-for="tid in folders[fid].content" :key="tid"
+                  :tags="tags" :tid="tid"></tag-card>
               </nav>
-            </my-collapse>
+            </fold-card>
           </div>
           <div v-else>空页面</div>
         </div>
@@ -58,14 +60,14 @@
 <script>
 import tagData from '@/data/data.js'
 
-import TopLine from '@/components/project/Folder/topLine'
-import FolderSider from '@/components/project/Folder/folderSider'
-
-import MyCollapse from '@/components/public/MyCollapse'
-import Tag from '@/components/public/Tag'
+import FoldCard from '@/view/common/FoldCard/FoldCard'
+import TagCard from '@/view/common/TagCard/TagCard'
+import TopLine from './topLine'
+import FolderSider from './folderSider'
 
 export default {
   name: 'Folder',
+  components: { TopLine, FolderSider, FoldCard, TagCard },
   data () {
     return {
       data: tagData,
@@ -102,7 +104,6 @@ export default {
     tags: function () {
       return this.repository.tags
     }
-  },
-  components: { TopLine, FolderSider, MyCollapse, Tag }
+  }
 }
 </script>
