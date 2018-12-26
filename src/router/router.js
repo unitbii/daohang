@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import Home from '@/view/Home/Home'
 import Folder from '@/view/Home/Folder/folder'
 import Welcome from '@/view/Welcome/welcome'
+import Login from '@/view/Login/login'
 import PageNotFind from '@/view/NotFound'
 
 Vue.use(Router)
@@ -30,6 +31,11 @@ export default new Router({
           component: Welcome
         }
       ]
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: Login
     },
     {
       path: '*',

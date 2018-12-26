@@ -4,7 +4,6 @@
 <style lang="less" scoped>
   div {
     display: inline-block;
-    line-height: 100%;
     width: 1.2em;
     height: 100%;
     position: relative;
@@ -50,7 +49,7 @@
 
 <template>
   <div :class="{'cursor': cursor}">
-    <span><span :class="spanStyle" :style="style.span"></span></span>
+    <span><span :class="spanClassName" :style="style.span"></span></span>
   </div>
 </template>
 
@@ -85,7 +84,7 @@ export default {
       default: '0.6em'
     },
     // 旋转方向，方向可以选择top/right/bottom/left
-    // 如果选两个方向，用'-'相接，首方向为折叠方向，尾
+    // 如果选两个方向，用'-'相接，首为折叠方向，尾为展开方向
     rotate: {
       type: String,
       default: 'right-bottom'
@@ -95,15 +94,15 @@ export default {
     isCollapsed: Boolean // 是否折叠，
   },
   computed: {
-    spanStyle () {
-      let style = {'slide': this.slide}
+    spanClassName () {
+      let className = {'slide': this.slide}
       if (this.end === '') {
-        style[this.start] = true
+        className[this.start] = true
       } else {
-        style[this.start] = this.isCollapsed
-        style[this.end] = !this.isCollapsed
+        className[this.start] = this.isCollapsed
+        className[this.end] = !this.isCollapsed
       }
-      return style
+      return className
     }
   },
   created () {
@@ -112,7 +111,7 @@ export default {
   methods: {
     check_rotate () {
       let reg = /^top$|^right$|^bottom$|^left$/
-      if (this.rotate && this.rotate.indexOf('-') !== -1) {
+      if (this.rotate.indexOf('-') !== -1) {
         let list = this.rotate.split('-')
         if (reg.test(list[0]) && reg.test(list[1])) {
           this.start = list[0]

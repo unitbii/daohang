@@ -46,7 +46,7 @@
 import IconArrows from '@/components/Icon/Arrows'
 
 export default {
-  name: 'MyCollapse',
+  name: 'FoldCard',
   data () {
     return {
       isCollapsed: true // 边栏初始状态（折叠）

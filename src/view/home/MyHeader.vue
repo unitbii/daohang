@@ -21,6 +21,7 @@
     display: inline-block;
     font-size: 16px;
     transition: background-color 0.3s, color 0.3s;
+    cursor: pointer;
   }
   .dropDownA:hover {
     background: #232326;
@@ -35,20 +36,22 @@
 </style>
 
 <template>
-  <div class="myHeader">
+  <div class="myHeader yrow">
     <div class="logo option fl">
       <h1>Dao航</h1>
       <span class="description">自定义导航专家</span>
     </div>
     <Dropdown class="fl" v-for="data in navData" :key="data.id">
-      <a class="option dropDownA" href="javascript:void(0)">{{ data.title }}</a>
+      <span class="option dropDownA">{{ data.title }}</span>
       <DropdownMenu slot="list" v-for="item in data.items" :key="item.id">
           <DropdownItem :disabled="item.disabled" :divided="item.divided" >{{ item.name }}</DropdownItem>
       </DropdownMenu>
     </Dropdown>
-    <div class="user option fr">
+
+    <a class="option dropDownA fr" href="/#/login">登录</a>
+    <!-- <div class="user option fr">
       <Avatar icon="person" size="default"/>
-    </div>
+    </div> -->
     <search-box class="mySearchBox fr"></search-box>
   </div>
 </template>

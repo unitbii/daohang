@@ -1,31 +1,16 @@
-<style lang="less">
-  .iHeader {
-    background: none;
-    height: 50px;
-    line-height: normal;
-    padding: 0;
-    box-shadow: 0 1px 6px rgba(0,0,0,0.3);
-    z-index: 1999;
-  }
-  .iSider {
-    box-shadow: 1px 0 6px rgba(0,0,0,0.5);
-    z-index: 1990;
-  }
-  .iContent {
-    position: relative;
-  }
+<style lang="less" scoped>
 </style>
 
 <template>
-  <Layout class="Home full">
-    <Header class="iHeader">
+  <Layout class="full">
+    <Header :style="style.iHeader">
       <my-header></my-header>
     </Header>
     <Layout>
-      <!-- <Sider class="iSider" collapsible :collapsed-width="58" :width="150" v-model="isCollapsed">
+      <Sider :style="style.iSider" collapsible :collapsed-width="58" :width="150" v-model="isCollapsed">
         <left-sider :isCollapsed="isCollapsed"></left-sider>
-      </Sider> -->
-      <Content class="iContent">
+      </Sider>
+      <Content :style="style.iContent">
           <router-view></router-view>
       </Content>
     </Layout>
@@ -41,7 +26,24 @@ export default {
   components: { MyHeader, LeftSider },
   data () {
     return {
-      isCollapsed: true // 边栏初始状态（折叠）
+      isCollapsed: true, // 边栏初始状态（折叠）
+      style: { // 不建议用class写ui框架的样式，因为无法保证优先级，建议写行内样式
+        iHeader: {
+          background: 'none',
+          height: '50px',
+          lineHeight: 'normal',
+          padding: '0',
+          boxShadow: '0 1px 6px rgba(0,0,0,0.3)',
+          zIndex: '1999'
+        },
+        iSider: {
+          boxShadow: '1px 0 6px rgba(0,0,0,0.5)',
+          zIndex: '1990'
+        },
+        iContent: {
+          position: 'relative'
+        }
+      }
     }
   }
 }

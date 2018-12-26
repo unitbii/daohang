@@ -42,7 +42,7 @@
         1002: {re_date: 1, title: '哔哩哔哩', href: 'http://www.bilibili.com/', desp: '( ゜- ゜)つロ 乾杯~'},
         1003: {re_date: 1, title: '天猫', href: 'http://www.tmall.com/', desp: '上天猫，就够了'},
         1004: {re_date: 1, title: '知乎', href: 'http://www.zhihu.com/', desp: '与世界分享你的知识、经验和见解'},
-        1005: {re_date: 1, title: '阿里云', href: 'https: //www.aliyun.com/', desp: '为了无法计算的价值'},
+        1005: {re_date: 1, title: '阿里云', href: 'https://www.aliyun.com/', desp: '为了无法计算的价值'},
         1006: {re_date: 1, title: 'Hostinger免费空间', href: 'http://api.hostinger.com.hk/redir/17224403', desp: '免费空间，支持PHP、MySql'},
         1007: {re_date: 1, title: '推酷', href: 'http://www.tuicool.com/', desp: 'IT人专属的个性聚合阅读社区'},
         1008: {re_date: 1, title: 'github社区', href: 'http://github.com', desp: '全球开源社区'},
