@@ -48,7 +48,8 @@
       </DropdownMenu>
     </Dropdown>
 
-    <a class="option dropDownA fr" href="/#/login">登录</a>
+    <!-- <a class="option dropDownA fr" href="login">登录</a> -->
+    <router-link class="option dropDownA fr" to="/login">登录</router-link>
     <!-- <div class="user option fr">
       <Avatar icon="person" size="default"/>
     </div> -->

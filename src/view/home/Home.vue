@@ -1,8 +1,11 @@
 <style lang="less" scoped>
+  .home {
+    min-width: 750px;
+  }
 </style>
 
 <template>
-  <Layout class="full">
+  <Layout class="home full">
     <Header :style="style.iHeader">
       <my-header></my-header>
     </Header>

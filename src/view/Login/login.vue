@@ -6,7 +6,7 @@
     border: 1px solid #fff;
     border-radius: 4px;
     color: #888;
-    width: 40%;
+    width: 400px;
     padding: 10px 0;
     text-align: center;
     position: relative;
