@@ -5,8 +5,7 @@ import Axios from 'axios'
 Vue.use(Vuex)
 
 const production = process.env.NODE_ENV === 'production'
-// const server = 'http://47.107.178.90:9920'
-const server = 'http://127.0.0.1:3000'
+const server = 'http://47.107.178.90:9920' // 有跨域问题
 const $api = !production ? server : ''
 
 export default new Vuex.Store({

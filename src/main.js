@@ -4,8 +4,8 @@ import Vue from 'vue'
 import Axios from 'axios'
 
 import App from './App'
-import router from './router/router'
-import store from './store/store'
+import router from './router'
+import store from './store'
 
 // UI框架iview
 import iView from 'iview'

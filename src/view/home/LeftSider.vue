@@ -53,14 +53,14 @@ export default {
         theme: 'dark',
         items: {
           'appList': {
-            name: 'welcome',
+            name: 'visit/unitbii',
             iconType: 'ios-navigate',
-            title: '欢迎'
+            title: '游客'
           },
           'folder': {
-            name: 'folder',
+            name: 'collect',
             iconType: 'search',
-            title: '导航'
+            title: '收藏'
           },
           'profile': {
             name: 'profile',
@@ -85,7 +85,8 @@ export default {
   },
   methods: {
     go (name) {
-      location.href = `/#/${name}`
+      // location.href = `/#/${name}`
+      this.$router.push('/' + name)
     }
   }
 }

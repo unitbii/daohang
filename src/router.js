@@ -3,14 +3,15 @@ import Router from 'vue-router'
 
 import Home from '@/view/Home/Home'
 import Folder from '@/view/Home/Folder/folder'
-import Welcome from '@/view/Welcome/welcome'
+import Collect from '@/view/Home/Collect'
+// import Welcome from '@/view/Welcome/welcome'
 import Login from '@/view/Login/login'
 import PageNotFind from '@/view/NotFound'
 
 Vue.use(Router)
 
 export default new Router({
-  // mode: 'history',
+  mode: 'history',
   routes: [
     {
       path: '/',
@@ -18,17 +19,18 @@ export default new Router({
       component: Home,
       children: [
         {
-          path: '/',
+          path: '(|collect)',
+          component: Collect
+        },
+        {
+          path: '/visit/:id',
+          name: 'Visit',
           component: Folder
         },
         {
-          path: '/folder',
-          component: Folder
-        },
-        {
-          path: '/welcome',
-          name: 'Welcome',
-          component: Welcome
+          path: '*',
+          name: 'PageNotFind',
+          component: PageNotFind
         }
       ]
     },
@@ -36,11 +38,6 @@ export default new Router({
       path: '/login',
       name: 'Login',
       component: Login
-    },
-    {
-      path: '*',
-      name: 'PageNotFind',
-      component: PageNotFind
     }
   ]
 })
