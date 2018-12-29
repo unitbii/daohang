@@ -31,7 +31,7 @@
         <h2>用户登录</h2>
       </header>
       <Input class="row" size="large" type="text" clearable
-        @on-change="(e)=>{recodeName(e)}" placeholder="用户名/电话/邮箱" />
+        @on-change="(e)=>{recodeName(e)}" placeholder="用户名" />
       <Input class="row" size="large" type="password" clearable
         @on-change="(e)=>{recodePassword(e)}" placeholder="密码" />
       <Button class="row" size="large" long @click="loginAsk">登 录</Button>
@@ -58,16 +58,14 @@ export default {
       this.password = e.target.value
     },
     loginAsk () {
-      let data = {
+      const data = {
         name: this.name,
         password: this.password
       }
-      this.$store.dispatch('login', {
-        data: data
-      }).then(() => {
-        console.log('成功')
-      }).catch(() => {
-        console.log('失败')
+      this.$store.dispatch('login', { data }).then((res) => {
+        this.$router.push('/Collect')
+      }).catch((res) => {
+        // 失败
       })
     }
   }

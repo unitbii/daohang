@@ -29,7 +29,7 @@
   }
 }
 .mySearchBox {
-  width: 30%;
+  width: 28%;
   height: 30px;
   margin: 10px 20px;
 }
@@ -48,7 +48,7 @@
       </DropdownMenu>
     </Dropdown>
 
-    <!-- <a class="option dropDownA fr" href="login">登录</a> -->
+    <span class="option dropDownA fr" @click="logout">登出</span>
     <router-link class="option dropDownA fr" to="/login">登录</router-link>
     <!-- <div class="user option fr">
       <Avatar icon="person" size="default"/>
@@ -96,6 +96,15 @@ export default {
           }
         }
       }
+    }
+  },
+  methods: {
+    logout () {
+      this.$store.dispatch('logout').then((res) => {
+        this.$router.push('/login')
+      }).catch((res) => {
+        // 失败？
+      })
     }
   }
 }

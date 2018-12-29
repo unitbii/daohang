@@ -21,13 +21,37 @@ export default new Vuex.Store({
     login (context, payload) {
       const { data } = payload
       return new Promise((resolve, reject) => {
-        Axios.post(`${$api}/api/login`, data).then((re) => {
-          console.log('成功')
-          resolve(re)
-        }).catch((re) => {
-          console.log('失败')
-          reject(re)
+        Axios.post(`${$api}/api/login`, data).then((res) => {
+          resolve(res)
+        }).catch((res) => {
+          reject(res)
         })
+      })
+    },
+    logout (context, payload) {
+      return new Promise((resolve, reject) => {
+        Axios.get(`${$api}/api/logout`).then((res) => {
+          resolve(res)
+        }).catch((res) => {
+          reject(res)
+        })
+      })
+    },
+    checkPermission (context, payload) {
+      // const { data } = payload
+      return new Promise((resolve, reject) => {
+        // Axios.post(`${$api}/api/checkPermission`, data).then((res) => {
+        //   console.log('成功', res)
+        //   resolve(res)
+        // }).catch((res) => {
+        //   console.log('失败', res)
+        //   reject(res)
+        // })
+        setTimeout(() => {
+          resolve({
+            code: 200
+          })
+        }, 300)
       })
     }
   }
