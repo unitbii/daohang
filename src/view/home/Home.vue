@@ -30,14 +30,14 @@ export default {
   data () {
     return {
       isCollapsed: true, // 边栏初始状态（折叠）
-      style: { // 不建议用class写ui框架的样式，因为无法保证优先级，建议写行内样式
+      style: { // 不建议ui组件的样式用class写，因为无法保证优先级，建议写行内样式
         iHeader: {
           background: 'none',
           height: '50px',
           lineHeight: 'normal',
           padding: '0',
           boxShadow: '0 1px 6px rgba(0,0,0,0.3)',
-          zIndex: '1999'
+          zIndex: '2000'
         },
         iSider: {
           boxShadow: '1px 0 6px rgba(0,0,0,0.5)',

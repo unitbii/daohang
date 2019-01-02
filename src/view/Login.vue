@@ -62,10 +62,14 @@ export default {
         name: this.name,
         password: this.password
       }
-      this.$store.dispatch('login', { data }).then((res) => {
-        this.$router.push('/Collect')
-      }).catch((res) => {
-        // 失败
+      this.$store.dispatch('login', data).then((res) => {
+        if (res.code === 200) {
+          this.$router.push('/')
+        } else {
+          console.error(res)
+        }
+      }).catch((err) => {
+        console.error(err)
       })
     }
   }

@@ -3,8 +3,6 @@ import Router from 'vue-router'
 
 import Home from '@/view/Home/Home'
 import Folder from '@/view/Home/Folder/folder'
-import Collect from '@/view/Home/Collect'
-// import Welcome from '@/view/Welcome/welcome'
 import Login from '@/view/Login'
 import PageNotFind from '@/view/NotFound'
 
@@ -24,8 +22,8 @@ export default new Router({
       component: Home,
       children: [
         {
-          path: '(|collect)',
-          component: Collect
+          path: '(|folder)',
+          component: Folder
         },
         {
           path: '/visit/:id',

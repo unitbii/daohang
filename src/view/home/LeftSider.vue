@@ -34,9 +34,8 @@
 <template>
   <Menu :class="menuitemClasses"
     :active-name="activeName" :theme="menuData.theme"
-    width="auto" @on-select="go">
-      <menu-item v-for="item in menuData.items" :key="item.name"
-        :name="item.name">
+    width="auto" @on-select="goto">
+      <menu-item v-for="item in menuData.items" :key="item.name" :name="item.name">
         <Icon :type="item.iconType"></Icon>
         <span>{{ item.title }}</span>
       </menu-item>
@@ -44,26 +43,28 @@
 </template>
 
 <script>
+import { goto } from '@/router/func'
+
 export default {
   name: 'LeftSider',
   data () {
     return {
-      basePath: 'home',
+      basePath: '/folder',
       menuData: {
         theme: 'dark',
         items: {
           'appList': {
-            name: 'visit/unitbii',
+            name: '/visit/unitbii',
             iconType: 'ios-navigate',
             title: '游客'
           },
           'folder': {
-            name: 'collect',
+            name: '/folder',
             iconType: 'search',
             title: '收藏'
           },
           'profile': {
-            name: 'profile',
+            name: '/profile',
             iconType: 'settings',
             title: '设置'
           }
@@ -77,17 +78,11 @@ export default {
       return ['menu-item', {'collapsed-menu': this.isCollapsed}]
     },
     activeName () {
-      let pathArray = this.$route.path.split('/')
-      if (pathArray[1] === this.basePath) {
-        return pathArray[2]
-      }
+      return this.$route.path !== '/' ? this.$route.path : this.basePath
     }
   },
   methods: {
-    go (name) {
-      // location.href = `/#/${name}`
-      this.$router.push('/' + name)
-    }
+    goto
   }
 }
 </script>

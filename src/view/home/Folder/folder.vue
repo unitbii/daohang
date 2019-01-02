@@ -1,9 +1,6 @@
 <style lang="less" scoped>
 .folder {
   font-size: 14px;
-  width: 100%;
-  height: 100%;
-  position: absolute;
   .floor02 {
     // background: #292929;
     background: #dedcd1;
@@ -29,7 +26,7 @@
 </style>
 
 <template>
-  <Layout class="folder">
+  <Layout class="folder full">
     <!-- 快捷 -->
     <Header :style="style.iHeader">
       <top-line :repository="repository" :toolStatus="toolStatus"></top-line>
@@ -42,8 +39,8 @@
       <!-- 内容 -->
       <Content>
         <div class="floor02">
-          <div class="content" v-if="activeFloder && activeFloder.content.length > 0">
-            <fold-card v-for="fid in activeFloder.content" :key="fid" :title="folders[fid].title">
+          <div class="content" v-if="activeFolder && activeFolder.content.length > 0">
+            <fold-card v-for="fid in activeFolder.content" :key="fid" :title="folders[fid].title">
               <nav class="yrow">
                 <tag-card v-for="tid in folders[fid].content" :key="tid"
                   :tags="tags" :tid="tid"></tag-card>
@@ -58,8 +55,6 @@
 </template>
 
 <script>
-import tagData from '@/data/data.js'
-
 import FoldCard from '@/view/common/FoldCard/FoldCard'
 import TagCard from '@/view/common/TagCard/TagCard'
 import TopLine from './topLine'
@@ -70,7 +65,6 @@ export default {
   components: { TopLine, FolderSider, FoldCard, TagCard },
   data () {
     return {
-      data: tagData,
       toolStatus: {
         edit: false,
         delete: false
@@ -82,7 +76,7 @@ export default {
           lineHeight: 'normal',
           padding: '0',
           boxShadow: '0 0 3px rgba(0,0,0,0.3)',
-          zIndex: '1899'
+          zIndex: '1900'
         },
         iSider: {
           boxShadow: '0 0 3px rgba(0,0,0,0.3)',
@@ -91,18 +85,36 @@ export default {
       }
     }
   },
+  created () {
+    // 获取数据
+    this.$store.dispatch('getTagData')
+  },
+  mounted () {
+    // 添加tag已经成功，只需要做成按钮 todo
+    // this.createTag({
+    //   title: '例子',
+    //   href: 'http://',
+    //   desp: '描述',
+    //   fatherID: 3001
+    // })
+  },
   computed: {
-    repository: function () {
-      return this.data.repositorys[this.data.active_repository]
+    repository () {
+      return this.$store.state.tagData.repositorys[this.$store.state.tagData.activeRepository]
     },
-    activeFloder: function () {
-      return this.repository.folders[this.repository.active_floder]
+    activeFolder () {
+      return this.repository.folders[this.repository.activeFolder]
     },
-    folders: function () {
+    folders () {
       return this.repository.folders
     },
-    tags: function () {
+    tags () {
       return this.repository.tags
+    }
+  },
+  methods: {
+    createTag (payload) {
+      this.$store.dispatch('createTag', payload)
     }
   }
 }

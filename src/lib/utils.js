@@ -1,40 +1,12 @@
-/* 较通用的方法 */
+/* 完全公用的方法集，跨项目适用 */
 
-// 获取cookie、
-export const getCookie = (name) => {
-  const reg = new RegExp('(^| )' + name + '=([^;]*)(;|$)')
-  const arr = document.cookie.match(reg)
-  if (arr) {
-    return (arr[2])
-  } else {
-    return null
-  }
-}
-// 设置cookie，增加到vue实例方便全局调用
-export const setCookie = (name, value, expiredays) => {
-  let exdate = new Date()
-  exdate.setDate(exdate.getDate() + expiredays)
-  document.cookie = name + '=' + escape(value) + ((expiredays == null) ? '' : ';expires=' + exdate.toGMTString())
-}
-// 删除cookie
-export const delCookie = (name) => {
-  let exp = new Date()
-  exp.setTime(exp.getTime() - 1)
-  let cval = getCookie(name)
-  if (cval != null) {
-    document.cookie = name + '=' + cval + ';expires=' + exp.toGMTString()
-  }
-}
+/* 较通用的方法 */
 
 // 克隆对象
 export const clone = (myObj) => {
-  if (typeof myObj !== 'object' || myObj === null) return myObj
-  let myNewObj = {}
-  for (let i in myObj) {
-    myNewObj[i] = clone(myObj[i])
-  }
-  return myNewObj
+  return JSON.parse(JSON.stringify(myObj))
 }
+
 // 数组重排
 export const compare = function (prop) {
   return function (obj1, obj2) {
@@ -51,7 +23,6 @@ export const compare = function (prop) {
 }
 
 /* 非常个人的用法 */
-
 // 通用判断法
 export const checked = (data) => {
   // 为不同类型做特殊处理
@@ -66,36 +37,34 @@ export const checked = (data) => {
       return data
   }
 }
+
 // 开启debug模式
 export const debug = (debug = 'debug', key = 'true') => {
   return getQuery(debug) === key
 }
-// 获取query
+
+// 获取query (这个自己写的，真丑啊，哪天改改 todo)
 export const getQuery = (key, string = window.location.search) => {
   let obj = {}
   let list = string.substring(1).split('&')
   for (let i in list) {
-    let k = list[i].split('=')[0]
-    let val = list[i].split('=')[1]
-    obj[k] = val
+    if (list[i]) {
+      let k = list[i].split('=')[0]
+      let val = list[i].split('=')[1]
+      if (k) {
+        obj[k] = val
+      }
+    }
   }
   return (key) ? obj[key] : obj
 }
+
 // 判断终端类型
 export const checkTerminalType = () => {
   let u = navigator.userAgent
   let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1 // android终端
   let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/) // ios终端
-  let isPC = !/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)
+  let isPC = !/Android|webOS|iPhone|iPod|BlackBerry/i.test(u)
 
-  if (isPC) {
-    return 'pc'
-  }
-  if (isAndroid) {
-    return 'android'
-  }
-  if (isiOS) {
-    return 'ios'
-  }
-  return 'other'
+  return { isPC, isAndroid, isiOS }
 }

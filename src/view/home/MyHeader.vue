@@ -8,6 +8,7 @@
   }
   .logo {
     h1 {
+      cursor: pointer;
       display: inline-block;
       font-size: 22px;
       font-weight: 700;
@@ -38,7 +39,7 @@
 <template>
   <div class="myHeader yrow">
     <div class="logo option fl">
-      <h1>Dao航</h1>
+      <h1 @click="goto()">Dao航</h1>
       <span class="description">自定义导航专家</span>
     </div>
     <Dropdown class="fl" v-for="data in navData" :key="data.id">
@@ -48,7 +49,7 @@
       </DropdownMenu>
     </Dropdown>
 
-    <span class="option dropDownA fr" @click="logout">登出</span>
+    <span class="option dropDownA fr" @click="logoutAsk">登出</span>
     <router-link class="option dropDownA fr" to="/login">登录</router-link>
     <!-- <div class="user option fr">
       <Avatar icon="person" size="default"/>
@@ -58,6 +59,7 @@
 </template>
 
 <script>
+import { goto } from '@/router/func'
 import SearchBox from '@/components/SearchBox/SearchBox'
 
 export default {
@@ -99,13 +101,18 @@ export default {
     }
   },
   methods: {
-    logout () {
+    logoutAsk () {
       this.$store.dispatch('logout').then((res) => {
-        this.$router.push('/login')
-      }).catch((res) => {
-        // 失败？
+        if (res.code === 200) {
+          this.$router.push('/login')
+        } else {
+          console.error(res)
+        }
+      }).catch((err) => {
+        console.error(err)
       })
-    }
+    },
+    goto
   }
 }
 </script>

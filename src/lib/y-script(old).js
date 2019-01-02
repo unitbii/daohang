@@ -3,23 +3,10 @@
  * 依赖jQuery
  * author: C.Y
  ***************************************************************************/
-var jQuery = require('jquery');
+// var jQuery = require('jquery');
 // jQuery.noConflict();
 
 /************************** JS函数(不依赖jquery) ***************************/
-
-//阻止所有默认事件
-//event.preventDefault();
-
-
-//阻止事件冒泡
-exports.stopBubble = function(e) {
-    if (e && e.stopPropagation) {
-        e.stopPropagation();
-    } else {
-        window.event.cancelBubble = true;
-    }
-};
 
 //检测 屏幕尺寸发生变化
 exports.resize = function(fn) {
@@ -33,38 +20,6 @@ exports.resize = function(fn) {
     }, false);
 }
 
-//判断ios
-exports.check_ios = function(fn) {
-    fn = fn || function() {};
-    var u = navigator.userAgent;
-    var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
-    if (isiOS) {
-        fn();
-        return true;
-    } else return false;
-}
-
-//判断android
-exports.check_android = function(fn) {
-    fn = fn || function() {};
-    var u = navigator.userAgent;
-    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
-    if (isAndroid) {
-        fn();
-        return true;
-    } else return false;
-}
-
-//判断微信
-exports.isWeiXin = function(fn) {
-    fn = fn || function() {};
-    var ua = window.navigator.userAgent.toLowerCase();
-    if (ua.match(/MicroMessenger/i) == 'micromessenger') {
-        fn();
-        return true;
-    } else return false;
-}
-
 //判断当中文输入法输入时，cpLock开(true)
 exports.cpCheck = function() {
     CPLOCK = false;
@@ -74,39 +29,6 @@ exports.cpCheck = function() {
     jQuery("form").on('compositionend', "input,textarea", function(e) {
         CPLOCK = false;
     });
-}
-
-//是否支持H5本地储存
-exports.check_H5Storage = function(fn) {
-    fn = fn || function() {};
-    if (typeof(Storage) !== "undefined") {
-        fn();
-        return true;
-    } else {
-        console.log("不支持 web 存储。");
-        return false;
-    }
-}
-
-//设置cookie
-exports.setCookie = function(name, value, time) { //默认存在7天
-    var days = 7,
-        exp = new Date();
-    if (isNaN(time)) {
-        console.log("time参数无效或不存在，cookie默认保留"+days+"天");
-        time = days * 24 * 60 * 60 * 1000;
-    }
-    exp.setTime(exp.getTime() + time);
-    document.cookie = name + '=' + escape(value) + '; expires=' + exp.toGMTString();
-}
-//获得cookie
-exports.getCookie = function(name) {
-    var arr,
-        reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
-    arr = document.cookie.match(reg);
-    if (arr) {
-        return unescape(arr[2]);
-    } else return null;
 }
 
 //监听屏幕滚动的事件触发过于频繁，我想降低其触发频率
@@ -312,34 +234,3 @@ exports.inputNum = function($input) {
 // 倒计时工具
 
 // 下拉菜单 组件
-
-//
-/***************************** 规模插件 *********************************/
-
-/* 自定义弹窗
- *
- */
-
-
-/* 上传图片
- * 需要执行Y_verifyForm.init()完成初始化。
- * 上传时，执行Y_verifyForm.upimg()来触发上传。具体参数查看方法详情
- * 图片上传还要封装一些功能：1、提示信息；2、
- */
-
-
-/* 表单验证
- * 初始化：执行 Y_verifyForm.init();
- * 需要在input中添加ytype=""以下定义的表单提交项
- * 目前显示错误信息的元素($showElem)规则是input标签同级的.caution元素: ($showElem=$t.parent().find(".caution"))
- * 这个项目还有待完善：
- *      1、检测分为变化即检测(input)、失去焦点检测(blur)、和剪切模式(cut)。
- *          1.1、检测模式静默打开，无需关闭。
- *      2、展示错误信息的元素可定制，模式可定制、可同时使用和关闭。
- *          2.1、展示错误信息的模式有：普通展示，弹窗展示，自定义。
- *      3、必填项等检测规则深化。
- *          3.1、非必填项为空时，直接通过检测。(或，正确值包括空值)
- *      4、目前只做了button[type=button]检查，其他提交方式没有做。
- * 重要bug：1、首先，该表单验证无法与其他表单验证共同阻止表单提交（不管哪个表单验证代码，一旦完全正确，表单一定会提交，其他表单验证阻止不了表单）
- *          2、重名检测这样，异步等待后台数据的验证，无法写进该表单验证中。
- */
