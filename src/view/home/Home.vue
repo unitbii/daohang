@@ -30,7 +30,7 @@ export default {
   data () {
     return {
       isCollapsed: true, // 边栏初始状态（折叠）
-      style: { // 不建议ui组件的样式用class写，因为无法保证优先级，建议写行内样式
+      style: { // 不建议UI组件的样式用class，因为无法保证优先级，建议行内样式
         iHeader: {
           background: 'none',
           height: '50px',

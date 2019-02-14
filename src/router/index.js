@@ -23,10 +23,11 @@ export default new Router({
       children: [
         {
           path: '(|folder)',
+          name: '',
           component: Folder
         },
         {
-          path: '/visit/:id',
+          path: 'visit/:id', // 访客
           name: 'Visit',
           component: Folder
         },

@@ -4,29 +4,32 @@
     padding: 14px;
     span {
       display: inline-block;
+      width: 6em;
       overflow: hidden;
-      width: 69px;
+      vertical-align: middle;
       white-space: nowrap;
-      vertical-align: bottom;
       transition: width 0.2s ease 0.2s;
     }
     i {
+      font-size: 16px;
+      line-height: 22px;
+      vertical-align: middle;
       transform: translateX(0px);
       transition: font-size .2s ease, transform .2s ease;
-      vertical-align: middle;
-      font-size: 16px;
     }
   }
 }
 .menu-item.collapsed-menu {
-  span {
-    width: 0px;
-    transition: width 0.2s ease;
-  }
-  i {
-    transform: translateX(5px);
-    transition: font-size .2s ease .2s, transform .2s ease .2s;
-    font-size: 22px;
+  li {
+    span {
+      width: 0px;
+      transition: width 0.2s ease;
+    }
+    i {
+      font-size: 22px;
+      transform: translateX(5px);
+      transition: font-size .2s ease .2s, transform .2s ease .2s;
+    }
   }
 }
 </style>
@@ -49,26 +52,26 @@ export default {
   name: 'LeftSider',
   data () {
     return {
-      basePath: '/folder',
+      defaultPath: '/folder',
       menuData: {
         theme: 'dark',
-        items: {
-          'appList': {
+        items: [
+          {
             name: '/visit/unitbii',
             iconType: 'ios-navigate',
-            title: '游客'
+            title: '游客游客游客游客游客游客'
           },
-          'folder': {
+          {
             name: '/folder',
             iconType: 'search',
             title: '收藏'
           },
-          'profile': {
+          {
             name: '/profile',
             iconType: 'settings',
             title: '设置'
           }
-        }
+        ]
       }
     }
   },
@@ -78,7 +81,7 @@ export default {
       return ['menu-item', {'collapsed-menu': this.isCollapsed}]
     },
     activeName () {
-      return this.$route.path !== '/' ? this.$route.path : this.basePath
+      return this.$route.path === '/' ? this.defaultPath : this.$route.path
     }
   },
   methods: {

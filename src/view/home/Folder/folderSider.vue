@@ -68,25 +68,30 @@
 </style>
 
 <template>
-  <ul class="floor_01">
-    <li v-for="id in repository.content" :key="id"
-      :class="{'on': id == repository.active_floder, 'disabled': false}"
-      @click="switchFloor(id)">
-      <h3 class=" ellipsis">{{ folders[id].title }}</h3>
-    </li>
-    <li class="new"><h3>新建</h3></li>
-    <!-- <div class="tools">
-      <img :src="img.add">
-      <img :class="{active: toolStatus.edit}" @click="edit" :src="img.edit">
-      <img :src="img.delete">
-      <img class="disabled" :src="img.setting">
-    </div> -->
-  </ul>
+  <div class="folderSider">
+    <ul class="floor_01">
+      <template v-if="repository && repository.content && repository.content.length > 0">
+        <li v-for="id in repository.content" :key="id"
+          :class="{'on': id == activeFolder, 'disabled': false}"
+          @click="selectFolder(id)">
+          <h3 class="ellipsis">{{ folders[id].title }}</h3>
+        </li>
+      </template>
+      <li class="new"><h3>新建</h3></li>
+      <!-- <div class="tools">
+        <img :src="img.add">
+        <img :class="{active: true}" @click="edit" :src="img.edit">
+        <img :src="img.delete">
+        <img class="disabled" :src="img.setting">
+      </div> -->
+    </ul>
+  </div>
 </template>
 
 <script>
 export default {
-  name: 'Floor01',
+  name: 'FolderSider',
+  props: ['repository', 'activeFolder', 'folders'],
   data () {
     return {
       img: {
@@ -97,22 +102,13 @@ export default {
       }
     }
   },
-  props: ['repository', 'data', 'toolStatus'],
   computed: {
-    folders: function () {
-      return this.repository.folders
-    }
   },
   methods: {
-    switchFloor: function (id) {
-      this.repository.active_floder = id
+    selectFolder (id) {
+      // this.repository.active_floder = id todo
     },
-    edit: function () {
-      if (this.toolStatus.edit) {
-        this.toolStatus.edit = false
-      } else {
-        this.toolStatus.edit = true
-      }
+    edit () {
     }
   }
 }

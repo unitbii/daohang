@@ -3,16 +3,17 @@ import $router from '@/router'
 import $store from '@/store'
 
 const defaultPath = '/login'
-// 无需权限列表
-const unPermissionList = [
+
+// 无需权限路由列表
+const unPermissionPathsList = [
   '/login',
   /^\/visit\/[A-Za-z0-9_]+$/,
-  '/folder',
+  '/folder', // 暂时
   '/'
 ]
 
 // 匹配正则数组(兼容字符串)
-const RegArrTest = (string, arr = unPermissionList) => {
+const RegArrTest = (string, arr = unPermissionPathsList) => {
   for (let key in arr) {
     let item = arr[key]
     if (typeof item === 'string') {

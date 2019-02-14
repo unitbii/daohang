@@ -29,17 +29,20 @@
   <Layout class="folder full">
     <!-- 快捷 -->
     <Header :style="style.iHeader">
-      <top-line :repository="repository" :toolStatus="toolStatus"></top-line>
+      <top-line :repository="repository" :tags="tags"/>
     </Header>
     <Layout>
       <!-- 边栏 -->
       <Sider :width="150" :style="style.iSider">
-        <folder-sider :repository="repository" :toolStatus="toolStatus"></folder-sider>
+        <folder-sider
+          :repository="repository"
+          :activeFolder="activeFolder"
+          :folders="folders" />
       </Sider>
       <!-- 内容 -->
       <Content>
         <div class="floor02">
-          <div class="content" v-if="activeFolder && activeFolder.content.length > 0">
+          <div class="content" v-if="activeFolder">
             <fold-card v-for="fid in activeFolder.content" :key="fid" :title="folders[fid].title">
               <nav class="yrow">
                 <tag-card v-for="tid in folders[fid].content" :key="tid"
@@ -65,10 +68,6 @@ export default {
   components: { TopLine, FolderSider, FoldCard, TagCard },
   data () {
     return {
-      toolStatus: {
-        edit: false,
-        delete: false
-      },
       style: {
         iHeader: {
           background: 'none',
@@ -86,8 +85,7 @@ export default {
     }
   },
   created () {
-    // 获取数据
-    this.$store.dispatch('getTagData')
+    this.getTagData()
   },
   mounted () {
     // 添加tag已经成功，只需要做成按钮 todo
@@ -100,21 +98,24 @@ export default {
   },
   computed: {
     repository () {
-      return this.$store.state.tagData.repositorys[this.$store.state.tagData.activeRepository]
+      return this.$store.getters['tagData/repository']
     },
     activeFolder () {
-      return this.repository.folders[this.repository.activeFolder]
+      return this.$store.getters['tagData/activeFolder']
     },
     folders () {
-      return this.repository.folders
+      return this.$store.getters['tagData/folders']
     },
     tags () {
-      return this.repository.tags
+      return this.$store.getters['tagData/tags']
     }
   },
   methods: {
+    getTagData () {
+      this.$store.dispatch('tagData/fetch')
+    },
     createTag (payload) {
-      this.$store.dispatch('createTag', payload)
+      this.$store.dispatch('tagData/createTag', payload)
     }
   }
 }

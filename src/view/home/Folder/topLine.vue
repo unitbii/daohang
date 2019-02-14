@@ -89,17 +89,19 @@
 <template>
   <div class="topLine">
     <ul class="yrow">
-      <li :class="{normal:li_normal, editing:li_edit}" v-for="id in repository.topLine.content" :key="id">
-        <a :href="tags[id].href">
-          <img :src="img.star02">
-          <span>{{ tags[id].title }}</span>
-        </a>
-        <div class="edit" v-show="li_edit"><span></span></div>
-        <!-- <div class="info">
-          <span class="title">{{ tags[id].title }}</span><span class="desp" v-if="tags[id].desp"> | {{ tags[id].desp }}</span><br/>
-          <span class="url">{{ tags[id].href }}</span>
-        </div> -->
-      </li>
+      <template v-if="topLine && topLine.content && topLine.content.length > 0">
+        <li :class="{normal:li_normal, editing:li_edit}" v-for="id in topLine.content" :key="id">
+          <a :href="tags[id].href">
+            <img :src="img.star02">
+            <span>{{ tags[id].title }}</span>
+          </a>
+          <div class="edit" v-show="li_edit"><span></span></div>
+        </li>
+        <!-- <li>正常大小的添加按钮 todo</li> -->
+      </template>
+      <template v-else>
+        <li>撑满的引导添加按钮</li>
+      </template>
     </ul>
   </div>
 </template>
@@ -107,6 +109,7 @@
 <script>
 export default {
   name: 'TopLine',
+  props: ['repository', 'tags'],
   data () {
     return {
       img: {
@@ -114,18 +117,17 @@ export default {
       }
     }
   },
-  props: ['repository', 'toolStatus'],
   computed: {
-    tags: function () {
-      return this.repository.tags
+    topLine () {
+      return this.repository ? this.repository.topLine : null
     },
-    li_edit: function () {
-      return this.toolStatus.edit
+    li_edit () {
+      return false // todo
     },
-    li_delete: function () {
+    li_delete () {
       return false
     },
-    li_normal: function () {
+    li_normal () {
       return !(this.li_edit || this.li_delete)
     }
   }

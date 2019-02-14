@@ -49,7 +49,7 @@
       </DropdownMenu>
     </Dropdown>
 
-    <span class="option dropDownA fr" @click="logoutAsk">登出</span>
+    <span class="option dropDownA fr" @click="logoutAsk()">登出</span>
     <router-link class="option dropDownA fr" to="/login">登录</router-link>
     <!-- <div class="user option fr">
       <Avatar icon="person" size="default"/>
@@ -67,47 +67,47 @@ export default {
   components: { SearchBox },
   data () {
     return {
-      navData: {
-        1: {
+      navData: [
+        {
           id: '1',
           title: '社区',
           items: {}
         },
-        2: {
+        {
           id: '2',
           title: '收藏',
-          items: {
-            1: {
+          items: [
+            {
               id: '1',
               name: '驴打滚',
               disabled: false,
               divided: false
             },
-            2: {
+            {
               id: '2',
               name: '豆汁儿',
               disabled: true,
               divided: false
             },
-            3: {
+            {
               id: '3',
               name: '北京烤鸭',
               disabled: false,
               divided: true
             }
-          }
+          ]
         }
-      }
+      ]
     }
   },
   methods: {
     logoutAsk () {
       this.$store.dispatch('logout').then((res) => {
-        if (res.code === 200) {
-          this.$router.push('/login')
-        } else {
-          console.error(res)
-        }
+        // 登出时要跳转到登录页？还是首页/社区页？
+        // 跳转前给予提示，以及倒计时 todo
+        // 是否可做成统一默认行为
+        // （以上为用户体验问题）
+        this.router.push('/login')
       }).catch((err) => {
         console.error(err)
       })

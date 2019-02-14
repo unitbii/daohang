@@ -63,7 +63,7 @@ export default {
         password: this.password
       }
       this.$store.dispatch('login', data).then((res) => {
-        if (res.code === 200) {
+        if (res.code === 0) {
           this.$router.push('/')
         } else {
           console.error(res)
