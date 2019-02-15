@@ -5,8 +5,8 @@
     color: #333;
     float: left;
     line-height: 30px;
-    padding: 0 1.6%;
-    margin: 2px;
+    padding: 0 6px;
+    margin: 4px 6px;
     transition: box-shadow 0.2s;
     .d-img {
       width: 1em;

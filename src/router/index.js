@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import Home from '@/view/Home/Home'
-import Folder from '@/view/Home/Folder/folder'
+import Home from '@/view/Home'
+import Folder from '@/view/Home/Folder'
 import Login from '@/view/Login'
 import PageNotFind from '@/view/NotFound'
 
@@ -23,11 +23,11 @@ export default new Router({
       children: [
         {
           path: '(|folder)',
-          name: '',
+          name: 'Folder',
           component: Folder
         },
         {
-          path: 'visit/:id', // 访客
+          path: 'visit/:id', // 访客逻辑还有待深挖
           name: 'Visit',
           component: Folder
         },

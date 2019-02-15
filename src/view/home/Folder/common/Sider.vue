@@ -1,6 +1,6 @@
 <style lang="less" scoped>
 @files_line-height: 40px;
-.floor_01 {
+.list {
   background: #2b2b2b;
   color: rgba(255, 255, 255, 0.7);
   width:150px;
@@ -12,11 +12,11 @@
     padding: 0 8%;
     text-align: center;
     cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
+    transition: background-color 0.2s, color 0.2s;
   }
   li.on {
-    background: #3a3a3a;
-    box-shadow: 0 0 4px rgba(255,255,255,0.3);
+    background: #353535;
+    box-shadow: 0 0 4px rgba(255,255,255,0.2);
     line-height: @files_line-height - 2;
     margin-top: 2px;
     position: relative;
@@ -62,17 +62,17 @@
     }
   }
 }
-.floor_01::-webkit-scrollbar {
+.list::-webkit-scrollbar {
   display: none;
 }
 </style>
 
 <template>
   <div class="folderSider">
-    <ul class="floor_01">
+    <ul class="list">
       <template v-if="repository && repository.content && repository.content.length > 0">
         <li v-for="id in repository.content" :key="id"
-          :class="{'on': id == activeFolder, 'disabled': false}"
+          :class="{'on': id == activeFolderID, 'disabled': false}"
           @click="selectFolder(id)">
           <h3 class="ellipsis">{{ folders[id].title }}</h3>
         </li>
@@ -103,10 +103,17 @@ export default {
     }
   },
   computed: {
+    activeRepositoryID () {
+      return this.$store.state.tagData.activeRepositoryID
+    },
+    activeFolderID () {
+      return this.$store.state.tagData.activeFolderID
+    }
   },
   methods: {
     selectFolder (id) {
-      // this.repository.active_floder = id todo
+      this.$router.push(`/folder?rid=${this.activeRepositoryID}&pid=${id}`)
+      this.$store.dispatch('tagData/setActiveFolderID', { id })
     },
     edit () {
     }
